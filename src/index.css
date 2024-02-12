@@ -5,9 +5,12 @@ body {
   margin: 0;
   background-color: #f5f5f5;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  width:100vw;
-  height:100vh;
-  background: rgb(61,189,230);
-  background: linear-gradient(306deg, rgba(61,189,230,1) 0%, rgba(219,0,170,1) 100%);
+  width: 100vw;
+  height: 100vh;
+  background: rgb(61, 189, 230);
+  background: linear-gradient(
+    306deg,
+    rgba(61, 189, 230, 1) 0%,
+    rgba(219, 0, 170, 1) 100%
+  );
 }
-

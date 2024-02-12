@@ -1,55 +1,38 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import TextField from "@mui/material/TextField";
-import { SignupSchema } from "./AuthSchema.jsx";
-import "./registration.css";
+import PrimaryButton from "../commons/buttons/PrimaryButton.jsx";
+import { registerSchema } from "./AuthSchema.jsx";
+import { registerApi } from "../services/auth.js";
+import styles from "./registration.module.css";
 
 const Registration = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    username: "",
-    countryCode: "+91",
-    mobile: "",
-    city: "",
-    state: "",
-    pincode: "",
-  });
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
       username: "",
-      country_code: "+91",
       mobile: "",
       city: "",
       state: "",
       pincode: "",
     },
-    validationSchema: SignupSchema,
-    onSubmit: (values) => {
-      // handleSubmit(values);
+    validationSchema: registerSchema,
+    onSubmit: async (values) => {
+      const response = await registerApi(values);
+      if (response.data) {
+        toast(response.data.message);
+        navigate("/");
+      }
     },
   });
 
   // const navigate = useNavigate();
   // const [error, setError] = useState("");
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -75,102 +58,95 @@ const Registration = () => {
   //   }
   // };
 
-  // const validateForm = () => {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!emailRegex.test(formData.email)) {
-  //     setError("Invalid email format");
-  //     return false;
-  //   }
-  //   const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(.{8,})$/;
-  //   if (!passwordRegex.test(formData.password)) {
-  //     setError(
-  //       "Password must be at least 8 characters with 1 uppercase and 1 special character",
-  //     );
-  //     return false;
-  //   }
-
-  //   setError("");
-  //   return true;
-  // };
-
   return (
-    <div className="container">
-      <h2>Registration</h2>
-      <form>
-        <div className="form">
+    <div className={styles.container}>
+      <h1>Registration</h1>
+      <form onSubmit={formik.handleSubmit}>
+        <div className={styles.register_form}>
           <TextField
-            size="small"
-            id="outlined-basic"
+            id="standard-basic"
+            variant="standard"
             name="email"
             label="Email"
-            variant="outlined"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
-            size="small"
-            id="outlined-basic"
             name="password"
             label="Password"
-            variant="outlined"
+            id="standard-basic"
+            variant="standard"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
           <TextField
-            id="outlined-basic"
             name="username"
             label="User name"
-            variant="outlined"
+            id="standard-basic"
+            variant="standard"
             value={formik.values.username}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.username && Boolean(formik.errors.username)}
+            helperText={formik.touched.username && formik.errors.username}
           />
           <TextField
-            id="outlined-basic"
-            name="countryCode"
-            label="Country Code"
-            variant="outlined"
-            value={formik.values.countryCode}
-            onChange={formik.handleChange}
-          />
-          <TextField
-            id="outlined-basic"
             name="mobile"
             label="Mobile"
-            variant="outlined"
+            id="standard-basic"
+            variant="standard"
             value={formik.values.mobile}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
+            error={formik.touched.mobile && Boolean(formik.errors.mobile)}
+            helperText={formik.touched.mobile && formik.errors.mobile}
           />
           <TextField
-            id="outlined-basic"
             name="city"
             label="City"
-            variant="outlined"
+            id="standard-basic"
+            variant="standard"
             value={formik.values.city}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
+            error={formik.touched.city && Boolean(formik.errors.city)}
+            helperText={formik.touched.city && formik.errors.city}
           />
           <TextField
-            id="outlined-basic"
             name="state"
             label="State"
-            variant="outlined"
+            id="standard-basic"
+            variant="standard"
             value={formik.values.state}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
+            error={formik.touched.state && Boolean(formik.errors.state)}
+            helperText={formik.touched.state && formik.errors.state}
           />
           <TextField
-            id="outlined-basic"
             name="pincode"
             label="Pincode"
-            variant="outlined"
+            id="standard-basic"
+            variant="standard"
             value={formik.values.pincode}
+            onBlur={formik.handleBlur}
             onChange={formik.handleChange}
+            error={formik.touched.pincode && Boolean(formik.errors.pincode)}
+            helperText={formik.touched.pincode && formik.errors.pincode}
           />{" "}
         </div>
-
-        <button className="regisBtn" type="submit">
-          Register
-        </button>
-        {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
+        <PrimaryButton type="submit">Register</PrimaryButton>
       </form>
+
+      <p className={styles.link}>
+        Already have an account <Link to="/">Login here</Link>.
+      </p>
     </div>
   );
 };

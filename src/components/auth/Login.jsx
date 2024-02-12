@@ -1,69 +1,67 @@
-import "./login.css";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { toast } from "react-toastify";
+import TextField from "@mui/material/TextField";
+import PrimaryButton from "../commons/buttons/PrimaryButton.jsx";
+import { loginSchema } from "./AuthSchema.jsx";
+import styles from "./login.module.css";
+import { loginApi } from "../services/auth.js";
 
 function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+  const navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      const response = await loginApi(values);
+      if (response.data) {
+        toast(response.data.message);
+        navigate("/dashboard");
+      }
+    },
   });
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Login</h1>
-      <form id="loginForm">
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
+      <form onSubmit={formik.handleSubmit}>
+        <div className={styles.login_form}>
+          <TextField
+            id="standard-basic"
+            variant="standard"
             name="email"
-            value={formData.email}
-            onChange={handleInputChange}
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            name="password"
+            label="Password"
+            id="standard-basic"
+            variant="standard"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <div className="password-input-wrapper">
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />{" "}
-            {formData.password && (
-              <span
-                className="toggle-password"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? "Hide" : "Show"}
-              </span>
-            )}{" "}
-          </div>
-        </div>
 
-        <button className="logBtn" type="submit">
-          Login
-        </button>
+        <PrimaryButton type="submit">Login</PrimaryButton>
       </form>
-      <p>
-        <Link to="/forgotpassword">Forgot Password?</Link>
-      </p>
 
-      <p>
+      {/* <p>
+        <Link to="/forgotpassword">Forgot Password?</Link>
+      </p> */}
+
+      <p className={styles.link}>
         New user? <Link to="/registration">Register here</Link>.
       </p>
     </div>

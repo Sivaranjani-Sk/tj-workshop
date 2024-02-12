@@ -4,6 +4,7 @@ import AuthLayout from "./layout/AuthLayout";
 import DefaultLayout from "./layout/DefaultLayout";
 import Login from "./components/auth/Login";
 import Registration from "./components/auth/Registration";
+import Dashboard from "./components/pages/Dashboard";
 
 const MainRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const MainRoutes = () => {
             <DefaultLayout component={Registration} layout={AuthLayout} />
           }
         />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
