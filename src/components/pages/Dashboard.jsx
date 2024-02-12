@@ -1,7 +1,7 @@
 export default function Dashboard() {
   return (
     <div>
-      <h1>Welcome to QTECH </h1>
+      <h1>Welcome to QTECH dashboard</h1>
     </div>
   );
 }
