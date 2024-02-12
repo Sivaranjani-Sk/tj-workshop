@@ -56,11 +56,6 @@ function Login() {
 
         <PrimaryButton type="submit">Login</PrimaryButton>
       </form>
-
-      {/* <p>
-        <Link to="/forgotpassword">Forgot Password?</Link>
-      </p> */}
-
       <p className={styles.link}>
         New user? <Link to="/registration">Register here</Link>.
       </p>

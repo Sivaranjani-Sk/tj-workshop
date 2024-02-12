@@ -30,34 +30,6 @@ const Registration = () => {
       }
     },
   });
-
-  // const navigate = useNavigate();
-  // const [error, setError] = useState("");
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const isValid = validateForm();
-  //   if (isValid) {
-  //     await axios
-  //       .post("http://localhost:3000/user/signup", {
-  //         email: formData.email,
-  //         password: formData.password,
-  //         username: formData.username,
-  //       })
-  //       .then((response) => {
-  //         console.log("response", response);
-  //         if (response.status == 200) {
-  //           toast(response.data.message);
-  //           navigate("/");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         toast(error.response.data.message);
-  //       });
-  //   }
-  // };
-
   return (
     <div className={styles.container}>
       <h1>Registration</h1>

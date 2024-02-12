@@ -14,7 +14,6 @@ const MainRoutes = () => {
           path="/"
           element={<DefaultLayout component={Login} layout={AuthLayout} />}
         />
-
         <Route
           path="/registration"
           element={
