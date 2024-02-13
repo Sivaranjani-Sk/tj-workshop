@@ -20,7 +20,10 @@ const MainRoutes = () => {
             <DefaultLayout component={Registration} layout={AuthLayout} />
           }
         />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={<DefaultLayout component={Dashboard} layout={AuthLayout} />}
+        />
       </Routes>
     </Router>
   );
