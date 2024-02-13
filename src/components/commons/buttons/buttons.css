@@ -1,0 +1,21 @@
+.primary {
+  background: linear-gradient(
+    306deg,
+    rgba(61, 189, 230, 1) 0%,
+    rgba(219, 0, 170, 1) 100%
+  );
+  display: block !important;
+  margin: auto !important;
+}
+
+.secondary {
+  border: 1px solid #e72020;
+  display: block !important;
+  margin: auto !important;
+}
+
+.flat {
+  color: #e72020;
+  display: block !important;
+  margin: auto !important;
+}

@@ -1,0 +1,30 @@
+.maindiv {
+  display: flex;
+  justify-content: center;
+}
+.logoWrap {
+  display: flex;
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  color: white;
+}
+.logo {
+  padding: 6px;
+  background: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 650px) {
+  .rootDiv {
+    align-items: flex-start;
+  }
+  .card {
+    padding: 1.25rem;
+    min-width: 300px;
+    margin-top: 8rem;
+  }
+}
