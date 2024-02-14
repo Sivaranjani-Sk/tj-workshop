@@ -15,7 +15,7 @@ export const registerApi = async (values) => {
     return response;
   } catch (error) {
     console.log(error);
-    toast(error);
+    toast(error.message);
   }
 };
 
@@ -28,6 +28,6 @@ export const loginApi = async (values) => {
     return response;
   } catch (error) {
     console.log(error);
-    toast(error);
+    toast(error.message);
   }
 };

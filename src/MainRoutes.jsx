@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthLayout from "./layout/AuthLayout";
 import DefaultLayout from "./layout/DefaultLayout";
+import ProtectedLayout from "./layout/ProtectedLayout";
 import Login from "./components/auth/Login";
 import Registration from "./components/auth/Registration";
 import Dashboard from "./components/pages/Dashboard";
@@ -22,7 +23,9 @@ const MainRoutes = () => {
         />
         <Route
           path="/dashboard"
-          element={<DefaultLayout component={Dashboard} layout={AuthLayout} />}
+          element={
+            <ProtectedLayout component={Dashboard} layout={AuthLayout} />
+          }
         />
       </Routes>
     </Router>

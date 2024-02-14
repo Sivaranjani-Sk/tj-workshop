@@ -3,16 +3,17 @@ import Button from "@mui/material/Button";
 import "./buttons.css";
 
 export default function SecondaryButton({
-  className = "",
   children = "",
   type = "",
+  ...props
 }) {
   return (
     <Button
       className="secondary"
-      style={{ ...className }}
+      color="secondary"
       type={type}
       variant="outlined"
+      {...props}
     >
       {children}
     </Button>
