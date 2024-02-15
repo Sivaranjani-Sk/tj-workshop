@@ -6,6 +6,7 @@ export default function SecondaryButton({
   children = '',
   type = '',
   onClick,
+  disabled = false,
 }) {
   return (
     <Button
@@ -14,6 +15,7 @@ export default function SecondaryButton({
       type={type}
       variant="outlined"
       onClick={() => onClick()}
+      disabled={disabled}
     >
       {children}
     </Button>

@@ -114,9 +114,11 @@ export default function Dashboard() {
         <>
           <h1>Welcome to QTech </h1>
           <h4>Practice questions to groom your brain !!</h4>
+          <div className={styles.subject}>{subjectName}</div>
           <span className={styles.time}>
             Time Remaining: {formatTime(seconds)}
           </span>
+
           <div className={styles.all_button}>
             <FlatButton
               className={styles.back_button}
@@ -124,6 +126,7 @@ export default function Dashboard() {
             >
               Back
             </FlatButton>
+
             <div className={styles.submit_button}>
               <PrimaryButton
                 type="submit"

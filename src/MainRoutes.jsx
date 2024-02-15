@@ -10,6 +10,7 @@ import ProtectedLayout from './layout/ProtectedLayout';
 import MainLayout from './layout/MainLayout';
 import Login from './components/auth/Login';
 import Registration from './components/auth/Registration';
+import Forgotpassword from './components/auth/Forgotpassword';
 import Dashboard from './components/pages/Dashboard';
 import Landingpage from './components/pages/Landingpage';
 
@@ -28,6 +29,15 @@ const MainRoutes = () => {
           element={
             <DefaultLayout
               component={Registration}
+              layout={AuthLayout}
+            />
+          }
+        />
+        <Route
+          path="/forgotpassword"
+          element={
+            <DefaultLayout
+              component={Forgotpassword}
               layout={AuthLayout}
             />
           }

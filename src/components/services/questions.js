@@ -3,7 +3,12 @@ import { toast } from 'react-toastify';
 
 export const getAllQuestionApi = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/qb/all');
+    const token = localStorage.getItem('token');
+    const response = await axios.get('http://localhost:3000/qb/all', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response;
   } catch (error) {
     console.log(error);
@@ -13,8 +18,14 @@ export const getAllQuestionApi = async () => {
 
 export const getSubjectQuestionApi = async (subject) => {
   try {
+    const token = localStorage.getItem('token');
     const response = await axios.get(
-      `http://localhost:3000/qb/subject/?subject=${subject}`
+      `http://localhost:3000/qb/subject/?subject=${subject}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response;
   } catch (error) {
@@ -25,11 +36,17 @@ export const getSubjectQuestionApi = async (subject) => {
 
 export const qbSubmitApi = async (values) => {
   try {
+    const token = localStorage.getItem('token');
     const response = await axios.post(
       'http://localhost:3000/qb/submit',
       {
         subject: values.subject,
         answers: values.answers,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
     return response;
@@ -41,8 +58,14 @@ export const qbSubmitApi = async (values) => {
 
 export const qbCreateApi = async (values) => {
   try {
+    const token = localStorage.getItem('token');
     const response = await axios.post(
       'http://localhost:3000/qb/submit',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
       {
         subjectName: values.subject,
         questions: values.questions,
