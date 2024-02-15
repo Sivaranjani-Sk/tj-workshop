@@ -1,12 +1,8 @@
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0;
   background-color: #f5f5f5;
-  font-family: cursive, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  width: 100vw;
-  height: 100vh;
+  font-family: cursive, 'Segoe UI', Tahoma, Geneva, Verdana,
+    sans-serif;
   background: rgb(61, 189, 230);
   background: linear-gradient(
     306deg,

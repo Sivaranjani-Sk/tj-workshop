@@ -1,10 +1,20 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import "./buttons.css";
+import React from 'react';
+import Button from '@mui/material/Button';
+import styles from './buttons.css';
 
-export default function FlatButton({ children = "", type = "", ...props }) {
+export default function FlatButton({
+  children = '',
+  type = '',
+  onClick,
+}) {
   return (
-    <Button className="flat" color="secondary" type={type} {...props}>
+    <Button
+      className={styles.flat}
+      color="secondary"
+      variant="contained"
+      type={type}
+      onClick={() => onClick()}
+    >
       {children}
     </Button>
   );

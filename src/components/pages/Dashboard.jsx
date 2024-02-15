@@ -1,116 +1,40 @@
-import styles from "./dashboard.module.css";
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import OptionComponent from "../commons/Optioncomponent.jsx";
-import SecondaryButton from "../commons/buttons/SecondaryButton.jsx";
-import PrimaryButton from "../commons/buttons/PrimaryButton.jsx";
-import option1 from "../../assets/option1.jpg";
-import option2 from "../../assets/option2.jpg";
-import option3 from "../../assets/option3.jpg";
-import option4 from "../../assets/option4.jpg";
-import ModalView from "../commons/modal/ModalView.jsx";
-import SuccessView from "./component/SuccessView.jsx";
-
-const data = [
-  {
-    id: "Q1",
-    question:
-      "The diameter of spherical bob,when measured with verniar callipers yields value:3.33cm,3.32cm,3.34cm and 3.33cm.The mean diameter to appropriate significant figure is: ",
-    options: ["33.8 cm", "328 cm", "28 cm", "3.3 cm"],
-    answer: "3.3 cm",
-    optionType: "string",
-  },
-  {
-    id: "Q2",
-    question:
-      "The diameter of spherical bob,when measured with verniar callipers yields value:3.33cm,3.32cm,3.34cm and 3.33cm.The mean diameter to appropriate significant figure is: ",
-    options: [option1, option2, option3, option4],
-    answer: option1,
-    optionType: "image",
-  },
-  {
-    id: "Q3",
-    question: "Which of the following statement is true: ",
-    options: [
-      "coefficient of viscosity is a scaler quantity",
-      "surface tension is a scalar quantity ",
-      "pressure is a vector quantity",
-      "relative density is a scaler quantity ",
-    ],
-    answer: "pressure is a vector quantity",
-    optionType: "string",
-  },
-  {
-    id: "Q4",
-    question: "Who wrote the novel 'To Kill a Mockingbird'?",
-    options: ["J.K. Rowling", "Harper Lee", "Stephen King", "Ernest Hemingway"],
-    answer: "Harper Lee",
-    optionType: "string",
-  },
-  {
-    id: "Q5",
-    question: "Which planet is known as the 'Red Planet'?",
-    options: ["Venus", "Mars", "Jupiter", "Saturn"],
-    answer: "Mars",
-    optionType: "string",
-  },
-  {
-    id: "Q6",
-    question: "What is the chemical symbol for water?",
-    options: ["O", "H2O", "HO", "W"],
-    answer: "H2O",
-    optionType: "string",
-  },
-
-  {
-    id: "Q7",
-    question: "Who is known as the 'Father of Computers'?",
-    options: ["Bill Gates", "Alan Turing", "Steve Jobs", "Charles Babbage"],
-    answer: "Charles Babbage",
-    optionType: "string",
-  },
-  {
-    id: "Q8",
-    question:
-      "The diameter of spherical bob,when measured with verniar callipers yields value:3.33cm,3.32cm,3.34cm and 3.33cm.The mean diameter to appropriate significant figure is: ",
-    options: [option1, option2, option3, option4],
-    answer: option2,
-    optionType: "image",
-  },
-  {
-    id: "Q9",
-    question: "What is the largest mammal in the world?",
-    options: ["Elephant", "Blue whale", "Giraffe", "Hippopotamus"],
-    answer: "Blue whale",
-    optionType: "string",
-  },
-  {
-    id: "Q10",
-    question: "Who wrote the play 'Romeo and Juliet'?",
-    options: [
-      "William Shakespeare",
-      "Jane Austen",
-      "Charles Dickens",
-      "Mark Twain",
-    ],
-    answer: "William Shakespeare",
-    optionType: "string",
-  },
-];
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import OptionComponent from '../commons/Optioncomponent.jsx';
+import FlatButton from '../commons/buttons/FlatButton.jsx';
+import SecondaryButton from '../commons/buttons/SecondaryButton.jsx';
+import PrimaryButton from '../commons/buttons/PrimaryButton.jsx';
+import ModalView from '../commons/modal/ModalView.jsx';
+import SuccessView from './component/SuccessView.jsx';
+import {
+  getSubjectQuestionApi,
+  qbSubmitApi,
+} from '../services/questions.js';
+import styles from './dashboard.module.css';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const params = new URLSearchParams(window.location.search);
+  const subjectName = params.get('subject');
+  const [qbList, setQbList] = useState([]);
+  const [answersList, setAnswerList] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+  const [seconds, setSeconds] = useState(10 * 60);
+  const [submitInd, setSubmitInd] = useState(false);
   const [mark, setMark] = useState(0);
   const itemsPerPage = 1;
   const [page, setPage] = useState(1);
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const pageCount = Math.ceil(qbList.length / itemsPerPage);
   const startIndex = (page - 1) * itemsPerPage;
-  const displayedData = data.slice(startIndex, startIndex + itemsPerPage);
+  const displayedData = qbList.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -118,15 +42,71 @@ export default function Dashboard() {
 
   const handleOptionChange = (e, id) => {
     setSelectedOption(e.target.value);
-    const result = data.filter((item) => item.id === id);
-    if (result[0].answer == e.target.value) {
-      setMark(mark + 1);
+    const index = answersList.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      setAnswerList((prev) => {
+        const newList = [...prev];
+        newList[index] = {
+          id,
+          selectedAnswer: e.target.value,
+        };
+        return newList;
+      });
+    } else {
+      setAnswerList((prev) => [
+        ...prev,
+        { id, selectedAnswer: e.target.value },
+      ]);
+    }
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
+  const getSubjectQb = async () => {
+    const response = await getSubjectQuestionApi(subjectName);
+    if (response?.data) {
+      setQbList(response?.data?.data?.questions);
+    }
+  };
+
+  const handleQbSubmit = async () => {
+    const list = {
+      subject: subjectName,
+      answers: answersList,
+    };
+    console.log(list, 'list');
+    const response = await qbSubmitApi(list);
+    if (response?.data) {
+      setShowSuccess(true);
+      setMark(response?.data?.data);
     }
   };
 
   useEffect(() => {
-    console.log(selectedOption);
-  }, [selectedOption]);
+    if (seconds == 0) setShowSuccess(true);
+  }, [seconds]);
+
+  useEffect(() => {
+    getSubjectQb();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prevSeconds) => {
+        if (prevSeconds === 0) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prevSeconds - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.dashboard}>
@@ -134,10 +114,31 @@ export default function Dashboard() {
         <>
           <h1>Welcome to QTech </h1>
           <h4>Practice questions to groom your brain !!</h4>
-          <div className={styles.submit_button}>
-            <PrimaryButton type="submit" onClick={() => setOpen(true)}>
-              Submit
-            </PrimaryButton>
+          <span className={styles.time}>
+            Time Remaining: {formatTime(seconds)}
+          </span>
+          <div className={styles.all_button}>
+            <FlatButton
+              className={styles.back_button}
+              onClick={() => navigate('/landingpage')}
+            >
+              Back
+            </FlatButton>
+            <div className={styles.submit_button}>
+              <PrimaryButton
+                type="submit"
+                onClick={() => {
+                  if (answersList.length !== qbList.length) {
+                    toast('Please answer all the question!');
+                  } else {
+                    setOpen(true);
+                    setSubmitInd(true);
+                  }
+                }}
+              >
+                Submit
+              </PrimaryButton>
+            </div>
           </div>
           <div className={styles.questions}>
             {displayedData.map((data) => (
@@ -174,7 +175,7 @@ export default function Dashboard() {
               />
             </Stack>
             <SecondaryButton
-              disabled={page === data.length}
+              disabled={page === qbList?.length}
               onClick={() => {
                 setPage(page + 1);
               }}
@@ -189,12 +190,17 @@ export default function Dashboard() {
             }}
             setSuccess={() => {
               setOpen(false);
-              setShowSuccess(true);
+              handleQbSubmit();
             }}
           />
         </>
       ) : (
-        <SuccessView mark={mark} total={data.length} />
+        <SuccessView
+          mark={mark}
+          total={qbList?.length}
+          submitInd={submitInd}
+          seconds={seconds}
+        />
       )}
     </div>
   );

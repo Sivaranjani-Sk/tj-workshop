@@ -1,11 +1,11 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import "./buttons.css";
+import React from 'react';
+import Button from '@mui/material/Button';
+import './buttons.css';
 
 export default function SecondaryButton({
-  children = "",
-  type = "",
-  ...props
+  children = '',
+  type = '',
+  onClick,
 }) {
   return (
     <Button
@@ -13,7 +13,7 @@ export default function SecondaryButton({
       color="secondary"
       type={type}
       variant="outlined"
-      {...props}
+      onClick={() => onClick()}
     >
       {children}
     </Button>

@@ -27,7 +27,7 @@ function Login() {
       if (response.data) {
         localStorage.setItem("token", response.data.token);
         toast(response.data.message);
-        navigate("/dashboard");
+        navigate("/landingpage");
       }
     },
   });
