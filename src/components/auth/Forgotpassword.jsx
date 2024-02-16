@@ -1,7 +1,7 @@
 // In your Forgotpassword component:
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { forgotpasswordApi } from '../services/auth';
 import { loginSchema } from './AuthSchema.jsx';
@@ -145,9 +145,10 @@ const Forgotpassword = () => {
           type="submit"
           onClick={() => {}}
         >
-          Reset Password
+          Reset
         </PrimaryButton>
       </form>
+      <Link to="/">Login</Link>
     </div>
   );
 };

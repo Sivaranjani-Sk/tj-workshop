@@ -29,9 +29,9 @@ export default function Dashboard() {
   const [mark, setMark] = useState(0);
   const itemsPerPage = 1;
   const [page, setPage] = useState(1);
-  const pageCount = Math.ceil(qbList.length / itemsPerPage);
+  const pageCount = Math.ceil(qbList?.length / itemsPerPage);
   const startIndex = (page - 1) * itemsPerPage;
-  const displayedData = qbList.slice(
+  const displayedData = qbList?.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -87,7 +87,10 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    if (seconds == 0) setShowSuccess(true);
+    if (seconds == 0) {
+      setShowSuccess(true);
+      handleQbSubmit();
+    }
   }, [seconds]);
 
   useEffect(() => {
@@ -131,7 +134,7 @@ export default function Dashboard() {
               <PrimaryButton
                 type="submit"
                 onClick={() => {
-                  if (answersList.length !== qbList.length) {
+                  if (answersList?.length !== qbList?.length) {
                     toast('Please answer all the question!');
                   } else {
                     setOpen(true);
@@ -144,7 +147,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className={styles.questions}>
-            {displayedData.map((data) => (
+            {displayedData?.map((data) => (
               <div className={styles.ques_wrap}>
                 <p>
                   {data.id} : {data.question}
@@ -203,6 +206,8 @@ export default function Dashboard() {
           total={qbList?.length}
           submitInd={submitInd}
           seconds={seconds}
+          qbList={qbList}
+          answersList={answersList}
         />
       )}
     </div>

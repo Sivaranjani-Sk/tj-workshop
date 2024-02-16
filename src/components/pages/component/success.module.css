@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
-  height: 450px;
+  min-height: 450px;
 }
 h2 {
   padding: 0;
@@ -25,4 +25,12 @@ h2 {
   color: rgb(255, 0, 68);
   font-size: 32px;
   margin: 0;
+}
+.showsuccess_wrap {
+  display: flex;
+  justify-content: center;
+  background-color: #fff; /* Default background color */
+  width: 1000px;
+  height: 600px;
+  padding-bottom: 30px;
 }
