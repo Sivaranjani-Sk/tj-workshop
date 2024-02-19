@@ -1,18 +1,21 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import "./buttons.css";
+import React from 'react';
+import Button from '@mui/material/Button';
+import './buttons.css';
 
 export default function SecondaryButton({
-  className = "",
-  children = "",
-  type = "",
+  children = '',
+  type = '',
+  onClick,
+  disabled = false,
 }) {
   return (
     <Button
       className="secondary"
-      style={{ ...className }}
+      color="secondary"
       type={type}
       variant="outlined"
+      onClick={() => onClick()}
+      disabled={disabled}
     >
       {children}
     </Button>

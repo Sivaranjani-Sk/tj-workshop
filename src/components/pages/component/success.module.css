@@ -1,0 +1,36 @@
+.success_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 450px;
+}
+h2 {
+  padding: 0;
+  margin: 10px;
+}
+.gif_img {
+  width: 250px;
+  height: 200px;
+}
+.mark_wrap {
+  text-align: center;
+  color: rgb(23, 225, 104);
+  border: 2px solid rgb(23, 225, 104);
+  border-radius: 50%;
+  padding: 15px;
+}
+.timeout {
+  color: rgb(255, 0, 68);
+  font-size: 32px;
+  margin: 0;
+}
+.showsuccess_wrap {
+  display: flex;
+  justify-content: center;
+  background-color: #fff; /* Default background color */
+  width: 1000px;
+  height: 600px;
+  padding-bottom: 30px;
+}

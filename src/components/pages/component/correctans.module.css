@@ -1,0 +1,29 @@
+.heading_ans {
+  margin-bottom: 40px;
+}
+.answrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.allanswer {
+  font-size: 16px;
+  font-weight: 800;
+  border-bottom: 1px solid blueviolet;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+.corr_answer {
+  color: green;
+}
+.wrong_answer {
+  color: red;
+}
+.practice_link {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}

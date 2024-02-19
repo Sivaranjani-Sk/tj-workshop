@@ -1,18 +1,18 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import "./buttons.css";
+import React from 'react';
+import Button from '@mui/material/Button';
+import './buttons.css';
 
 export default function PrimaryButton({
-  className = "",
-  children = "",
-  type = "",
+  children = '',
+  type = '',
+  onClick,
 }) {
   return (
     <Button
       className="primary"
-      style={{ ...className }}
       type={type}
       variant="contained"
+      onClick={() => onClick()}
     >
       {children}
     </Button>

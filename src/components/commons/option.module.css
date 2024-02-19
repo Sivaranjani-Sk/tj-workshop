@@ -1,0 +1,22 @@
+.optionsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.img {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  border: 1px solid rgb(202, 197, 197);
+}
+input {
+  cursor: pointer;
+}
+label {
+  padding: 6px;
+}
+
+.option {
+  display: flex;
+}
