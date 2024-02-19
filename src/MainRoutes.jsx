@@ -13,6 +13,7 @@ import Registration from './components/auth/Registration';
 import Forgotpassword from './components/auth/Forgotpassword';
 import Dashboard from './components/pages/Dashboard';
 import Landingpage from './components/pages/Landingpage';
+import QuestionAnswer from './components/pages/QuestionAnswer';
 
 const MainRoutes = () => {
   return (
@@ -56,6 +57,15 @@ const MainRoutes = () => {
           element={
             <ProtectedLayout
               component={Landingpage}
+              layout={MainLayout}
+            />
+          }
+        />
+        <Route
+          path="/question-answer"
+          element={
+            <ProtectedLayout
+              component={QuestionAnswer}
               layout={MainLayout}
             />
           }

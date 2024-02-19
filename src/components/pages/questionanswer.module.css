@@ -1,0 +1,53 @@
+.qawrap_container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  background-color: #fff;
+  width: 800px;
+  border-radius: 20px;
+  padding: 12px;
+  margin-bottom: 80px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.questionans_wrap {
+  border: 5px solid rgb(58, 113, 181);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.questionans_link_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.question_wrap {
+  font-size: 18px;
+  padding: 15px;
+}
+.pdf_button {
+  margin-bottom: 10px;
+}
+.qasubject {
+  display: block;
+  margin: auto;
+  font-size: 20px;
+  color: blueviolet;
+  padding: 10px;
+  border-bottom: 1px solid;
+}
+.qa_wrap {
+  display: flex;
+  justify-content: space-around;
+}
+.correctans_wrap {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+.correctans_wrap p {
+  border: 2px dashed rgb(21, 91, 111);
+  width: fit-content;
+  padding: 10px;
+}

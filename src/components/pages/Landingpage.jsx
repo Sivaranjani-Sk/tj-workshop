@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import styles from './landingpage.module.css';
-import FlatButton from '../commons/buttons/FlatButton.jsx';
 import { useNavigate } from 'react-router-dom';
+import FlatButton from '../commons/buttons/FlatButton.jsx';
+import SecondaryButton from '../commons/buttons/SecondaryButton.jsx';
+import styles from './landingpage.module.css';
+
 const data = [
   {
     exampaper: 'NEET-2023 ( Chemistry )',
@@ -36,15 +38,15 @@ const data = [
     button2: 'Attempt Now - Test Mode',
   },
 ];
+
 export default function Landingpage() {
   const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('Select-Course');
+  const [showQa, setShowQa] = useState(false);
+
   return (
     <div className={styles.landingpage}>
       <h1>Welcome to QTech </h1>
       <h4>Practice questions to groom your brain !!</h4>
-
       <div className={styles.main_wrap}>
         {' '}
         {data.map((data) => (
@@ -70,6 +72,17 @@ export default function Landingpage() {
             >
               {data.button2}
             </FlatButton>
+            <div className={styles.pdf_button_div}>
+              <SecondaryButton
+                onClick={() => {
+                  navigate(
+                    `/question-answer?subject=${data.subject}`
+                  );
+                }}
+              >
+                Download PDF
+              </SecondaryButton>
+            </div>
           </div>
         ))}
       </div>

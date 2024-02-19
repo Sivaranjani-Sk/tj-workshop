@@ -8,8 +8,9 @@
   padding: 12px;
   margin-bottom: 80px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .main_wrap {
@@ -60,6 +61,12 @@
   flex-direction: column;
   justify-content: space-around;
   margin-bottom: 10px;
+}
+.pdf_button_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 10px;
 }
 .box_content1 {
   border-bottom: 1px solid rgb(206, 151, 199);
