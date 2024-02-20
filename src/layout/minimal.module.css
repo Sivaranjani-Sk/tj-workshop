@@ -76,6 +76,21 @@
 .dropbtn:hover {
   background-color: #ddd;
 }
+.footer {
+  background-color: rgb(14, 2, 32);
+  color: white;
+  padding: 20px;
+}
+.footer_sec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.foot_icon {
+  width: 20px;
+  padding: 10px;
+}
 
 @media screen and (max-width: 650px) {
   .rootDiv {

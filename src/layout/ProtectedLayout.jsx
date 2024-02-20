@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import NotFound from './NotFound';
 
 const DefaultLayout = (props) => {

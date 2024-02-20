@@ -1,5 +1,5 @@
-import logo from "../assets/logo.png";
-import styles from "./minimal.module.css";
+import logo from '../assets/logo.png';
+import styles from './minimal.module.css';
 
 const AuthLayout = (props) => {
   const { children } = props;
